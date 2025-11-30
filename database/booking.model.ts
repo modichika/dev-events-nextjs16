@@ -37,7 +37,7 @@ const BookingSchema = new Schema<IBooking>(
 );
 
 // Pre-save hook to validate events exists before creating booking
-BookingSchema.pre('save', async function (next) {
+BookingSchema.pre('save', async function (next:any) {
   const booking = this as IBooking;
 
   // Only validate eventId if it's new or modified
