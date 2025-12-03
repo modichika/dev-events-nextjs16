@@ -3,6 +3,26 @@
 import Event from '@/database/event.model';
 import connectDB from "@/lib/mongodb";
 
+
+// Add this to lib/actions/event.actions.ts
+
+export const getAllEvents = async () => {
+    try {
+        await connectDB();
+
+        // Find all events, sort by newest first
+        const events = await Event.find({}).sort({ createdAt: -1 }).lean();
+
+        // Convert MongoDB objects to plain JSON to avoid Next.js warnings
+        // Return it as an object { events: [] } to match your page structure
+        return { events: JSON.parse(JSON.stringify(events)) };
+
+    } catch (error) {
+        console.error("❌ Error fetching all events:", error);
+        return { events: [] };
+    }
+}
+
 export const getSimilarEventsBySlug = async (slug: string) => {
     try {
         await connectDB();
