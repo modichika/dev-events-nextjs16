@@ -30,11 +30,13 @@ if (!global.mongoose) {
 async function connectDB(): Promise<typeof mongoose> {
     // Return existing connection if available
     if (cached.conn) {
+        console.log("🟢 USING EXISTING CONNECTION");
         return cached.conn;
     }
 
     // Return existing connection promise if one is in progress
     if (!cached.promise) {
+        console.log("🔴 CREATING NEW CONNECTION");
         // Validate MongoDB URI exists
         if (!MONGODB_URI) {
             throw new Error(
