@@ -21,8 +21,20 @@ export async function POST(req: NextRequest){    try{
 
         if(!file)  return NextResponse.json({message: 'Image file is required'}, {status: 400})
 
-     let tags = JSON.parse(formData.get('tags') as string);
-    let agenda = JSON.parse(formData.get('agenda') as string);
+    //  let tags = JSON.parse(formData.get('tags') as string);
+    // let agenda = JSON.parse(formData.get('agenda') as string);
+
+
+    let tags, agenda;
+    try {
+        tags = JSON.parse(formData.get('tags') as string);
+        agenda = JSON.parse(formData.get('agenda') as string);
+    } catch (parseError) {
+        return NextResponse.json(
+            { message: 'Invalid JSON format for tags or agenda' },
+            { status: 400 }
+        );
+    }
 
 
 
@@ -62,6 +74,6 @@ export async function GET(){
         return NextResponse.json({ message: 'Events fetched successfully', events}, {status: 200});
         
     } catch (e) {
-        return NextResponse.json({message: 'Event Fetching failed', error:e}, { status: 500});
+        return NextResponse.json({message: 'Event Fetching failed', error: e instanceof Error ? e.message : 'Unknown error'}, { status: 500});
     }
 }

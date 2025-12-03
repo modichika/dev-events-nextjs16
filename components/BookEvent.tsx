@@ -3,9 +3,6 @@
 import React, {useState} from "react";
 
 
-
-
-
     const BookEvent = () => {
         const [email, setEmail] = useState('');
         const [submitted, setSubmitted] = useState(false);
@@ -16,6 +13,7 @@ import React, {useState} from "react";
               setTimeout(() => {
                   setSubmitted(true);
               }, 1000)
+
         }
 
         return (

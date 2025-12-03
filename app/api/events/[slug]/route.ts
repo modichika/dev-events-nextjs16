@@ -93,7 +93,6 @@ export async function GET(
       {
         message: 'Failed to fetch events',
         success: false,
-        error: error instanceof Error ? error.message : 'Unknown error',
       },
       { status: 500 }
     );
