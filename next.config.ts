@@ -1,7 +1,12 @@
-/**
- * @type {import('next').NextConfig}
- */
-const nextConfig = {
+import {NextConfig} from "next";
+const nextConfig: NextConfig = {
+    cacheComponents: true,
+    images: {
+        remotePatterns: [{
+            protocol: 'https',
+            hostname: 'res.cloudinary.com'
+        }]
+    },
   async rewrites() {
     return [
       {
@@ -18,4 +23,4 @@ const nextConfig = {
   skipTrailingSlashRedirect: true,
 }
 
-module.exports = nextConfig
+export default nextConfig;
