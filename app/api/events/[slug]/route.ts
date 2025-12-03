@@ -10,8 +10,10 @@ type RouteParams = {
 }
 
 /**
- * GET /api/events/[slug]
- * Fetches a single events by its slug
+ * Fetches an event by its slug and returns the result as a JSON response.
+ *
+ * @param params - Route params (a promise resolving to an object with a `slug` string)
+ * @returns A NextResponse whose JSON body includes `message` and `success`; when an event is found the body also includes `event`; on failure the body may include `error`. The response status is 200 on success, 400 for invalid input, 404 if not found, 503 for database connection issues, or 500 for other errors.
  */
 export async function GET(
   req: NextRequest,
